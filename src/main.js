@@ -113,4 +113,15 @@ async function getMovieById(id) {
     movieDetailScore.textContent = movie.vote_average.toFixed(1);
 
     createGenre(movie.genres, movieDetailCategoriesList);
+
+    getSimilarMoviesById(id);
+}
+
+async function getSimilarMoviesById(id) {
+    const { data } = await api(`/movie/${id}/similar`);
+    const movies = data.results;
+
+    createMovies(movies, relatedMoviesContainer);
+
+    relatedMoviesContainer.scrollTo(0, 0);
 }
