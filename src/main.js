@@ -41,11 +41,36 @@ async function getGenresPreview() {
         const genresTitle = document.createElement("h3");
         genresTitle.classList.add("category-title");
         genresTitle.setAttribute("id", "id" + genre.id);
+        genresTitle.addEventListener("click", () => location.hash = `genre=${genre.id}-${genre.name}`);
 
         const genresTitleText = document.createTextNode(genre.name);
         genresTitle.appendChild(genresTitleText);
 
         genresContainer.appendChild(genresTitle);
         categoriesPreviewList.appendChild(genresContainer);
+    });
+}
+
+async function getMoviesByGenre(id) {
+    const { data } = await api("discover/movie", {
+        params: {
+            with_genres: id
+        }
+    });
+
+    genericSection.innerHTML = "";
+
+    const movies = data.results;
+    movies.forEach(movie => {
+        const movieContainer = document.createElement("div");
+        movieContainer.classList.add("movie-container");
+
+        const movieImg = document.createElement("img");
+        movieImg.classList.add("movie-img");
+        movieImg.setAttribute("alt", movie.title);
+        movieImg.setAttribute("src", "https://image.tmdb.org/t/p/w300/" + movie.poster_path);
+
+        movieContainer.appendChild(movieImg);
+        genericSection.appendChild(movieContainer);
     });
 }

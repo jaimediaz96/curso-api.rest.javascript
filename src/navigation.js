@@ -97,4 +97,12 @@ function genrePage() {
     categoriesPreviewSection.classList.add("inactive");
     genericSection.classList.remove("inactive");
     movieDetailSection.classList.add("inactive");
+
+    const [ _, genreData] = location.hash.split("=");
+    const [ genreId, genreName ] = genreData.split("-");
+
+    const decodeName = decodeURI(genreName);
+    headerCategoryTitle.innerHTML = decodeName;
+
+    getMoviesByGenre(genreId);
 }
