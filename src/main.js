@@ -8,12 +8,11 @@ const api = axios.create({
     }
 });
 
-async function getTrendingMoviesPreview() {
-    const { data } = await api("trending/movie/day");
+// Utils
 
-    trendingMoviesPreviewList.innerHTML = "";
+function createMovies(movies, container) {
+    container.innerHTML = "";
 
-    const movies = data.results;
     movies.forEach(movie => {
         const movieContainer = document.createElement("div");
         movieContainer.classList.add("movie-container");
@@ -24,16 +23,13 @@ async function getTrendingMoviesPreview() {
         movieImg.setAttribute("src", "https://image.tmdb.org/t/p/w300/" + movie.poster_path);
 
         movieContainer.appendChild(movieImg);
-        trendingMoviesPreviewList.appendChild(movieContainer);
+        container.appendChild(movieContainer);
     });
 }
 
-async function getGenresPreview() {
-    const { data } = await api("genre/movie/list");
+function createGenre(genres, container) {
+    container.innerHTML = "";
 
-    categoriesPreviewList.innerHTML = "";
-
-    const genres = data.genres;
     genres.forEach(genre => {
         const genresContainer = document.createElement("div");
         genresContainer.classList.add("category-container");
@@ -47,8 +43,25 @@ async function getGenresPreview() {
         genresTitle.appendChild(genresTitleText);
 
         genresContainer.appendChild(genresTitle);
-        categoriesPreviewList.appendChild(genresContainer);
+        container.appendChild(genresContainer);
     });
+}
+
+
+// Llamados a la API
+
+async function getTrendingMoviesPreview() {
+    const { data } = await api("trending/movie/day");
+    const movies = data.results;
+
+    createMovies(movies, trendingMoviesPreviewList);
+}
+
+async function getGenresPreview() {
+    const { data } = await api("genre/movie/list");
+    const genres = data.genres;
+
+    createGenre(genres, categoriesPreviewList);
 }
 
 async function getMoviesByGenre(id) {
@@ -57,20 +70,7 @@ async function getMoviesByGenre(id) {
             with_genres: id
         }
     });
-
-    genericSection.innerHTML = "";
-
     const movies = data.results;
-    movies.forEach(movie => {
-        const movieContainer = document.createElement("div");
-        movieContainer.classList.add("movie-container");
 
-        const movieImg = document.createElement("img");
-        movieImg.classList.add("movie-img");
-        movieImg.setAttribute("alt", movie.title);
-        movieImg.setAttribute("src", "https://image.tmdb.org/t/p/w300/" + movie.poster_path);
-
-        movieContainer.appendChild(movieImg);
-        genericSection.appendChild(movieContainer);
-    });
+    createMovies(movies, genericSection);
 }

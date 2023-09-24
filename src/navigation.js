@@ -5,8 +5,20 @@ trendingBtn.addEventListener("click", () => location.hash = "trends");
 window.addEventListener("DOMContentLoaded", navigator, false);
 window.addEventListener("hashchange", navigator, false);
 
+// Utils
+
+function smoothscroll(){
+    const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    if (currentScroll > 0) {
+         window.requestAnimationFrame(smoothscroll);
+         window.scrollTo (0,currentScroll - (currentScroll/5));
+    }
+};
+
+// Navegation
+
 function navigator() {
-    console.log({ location });
+    smoothscroll();
 
     if (location.hash.startsWith("#trends")) {
         trendsPage();
@@ -18,7 +30,7 @@ function navigator() {
         genrePage();
     } else {
         homePage();
-    }   
+    }
 }
 
 function homePage() {
