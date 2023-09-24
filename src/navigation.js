@@ -1,4 +1,4 @@
-arrowBtn.addEventListener("click", () => location.hash = "home");
+arrowBtn.addEventListener("click", () => history.back());
 searchFormBtn.addEventListener("click", () => location.hash = "search=" + searchFormInput.value.trim());
 trendingBtn.addEventListener("click", () => location.hash = "trends");
 
@@ -64,6 +64,10 @@ function trendsPage() {
     categoriesPreviewSection.classList.add("inactive");
     genericSection.classList.remove("inactive");
     movieDetailSection.classList.add("inactive");
+
+    headerCategoryTitle.innerHTML = "Tendencias";
+
+    getTrendingMovies();
 }
 
 function searchPage() {
