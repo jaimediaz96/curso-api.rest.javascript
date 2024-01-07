@@ -24,7 +24,7 @@ function smoothscroll() {
   }
 }
 
-// Navegation
+// Navigation
 
 function navigator() {
   smoothscroll();
@@ -61,12 +61,14 @@ function homePage() {
   searchForm.classList.remove("inactive");
 
   trendingPreviewSection.classList.remove("inactive");
+  likedMoviesSection.classList.remove("inactive");
   categoriesPreviewSection.classList.remove("inactive");
   genericSection.classList.add("inactive");
   movieDetailSection.classList.add("inactive");
 
   getTrendingMoviesPreview();
   getGenresPreview();
+  getLikedMovies();
 }
 
 function trendsPage() {
@@ -79,11 +81,12 @@ function trendsPage() {
   searchForm.classList.add("inactive");
 
   trendingPreviewSection.classList.add("inactive");
+  likedMoviesSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
 
-  headerCategoryTitle.innerHTML = "Tendencias";
+  headerCategoryTitle.innerHTML = "Trending";
 
   getTrendingMovies();
 
@@ -100,6 +103,7 @@ function searchPage() {
   searchForm.classList.remove("inactive");
 
   trendingPreviewSection.classList.add("inactive");
+  likedMoviesSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
@@ -124,6 +128,7 @@ function moviePage() {
   searchForm.classList.add("inactive");
 
   trendingPreviewSection.classList.add("inactive");
+  likedMoviesSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.add("inactive");
   movieDetailSection.classList.remove("inactive");
@@ -143,6 +148,7 @@ function genrePage() {
   searchForm.classList.add("inactive");
 
   trendingPreviewSection.classList.add("inactive");
+  likedMoviesSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");

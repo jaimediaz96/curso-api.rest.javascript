@@ -22,51 +22,47 @@
       <h1 class="header-title header-title--categoryView inactive"></h1>
 
       <form id="searchForm" class="header-searchForm">
-        <input type="text" placeholder="Buscar" />
+        <input type="text" placeholder="Search" />
         <button id="searchBtn">🔍</button>
       </form>
     </header>
 
     <section id="trendingPreview" class="trendingPreview-container">
       <div class="trendingPreview-header">
-        <h2 class="trendingPreview-title">Tendencias</h2>
-        <button class="trendingPreview-btn">Ver más</button>
+        <h2 class="trendingPreview-title">Trending</h2>
+        <button class="trendingPreview-btn">See more</button>
       </div>
 
       <article class="trendingPreview-movieList">
         <div class="movie-container movie-container--loading"></div>
         <div class="movie-container movie-container--loading"></div>
-        <div class="movie-container movie-container--loading">
-          <!-- <img
-          src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-          class="movie-img"
-          alt="Nombre de la película"
-        /> -->
-        </div>
+        <div class="movie-container movie-container--loading"></div>
       </article>
     </section>
 
     <section id="categoriesPreview" class="categoriesPreview-container">
-      <h2 class="categoriesPreview-title">Categorías</h2>
+      <h2 class="categoriesPreview-title">Categories</h2>
 
       <article class="categoriesPreview-list">
         <div class="category-container category-container--loading"></div>
         <div class="category-container category-container--loading"></div>
-        <div class="category-container category-container--loading">
-          <!-- <h3 id="id28" class="category-title">Romance</h3> -->
-        </div>
+        <div class="category-container category-container--loading"></div>
       </article>
     </section>
 
-    <section id="genericList" class="genericList-container inactive">
-      <!-- <div class="movie-container">
-      <img
-        src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-        class="movie-img"
-        alt="Nombre de la película"
-      />
-    </div> -->
+    <section id="liked" class="liked-container">
+      <div class="liked-header">
+        <h2 class="liked-title">Favorite movies</h2>
+      </div>
+  
+      <article class="liked-movieList">
+        <div class="movie-container  movie-container--loading"></div>
+        <div class="movie-container  movie-container--loading"></div>
+        <div class="movie-container  movie-container--loading"></div>
+      </article>
     </section>
+
+    <section id="genericList" class="genericList-container inactive"></section>
 
     <section id="movieDetail" class="movieDetail-container inactive">
       <h1 class="movieDetail-title"></h1>
@@ -76,30 +72,22 @@
       <article class="categories-list">
         <div class="category-container category-container--loading"></div>
         <div class="category-container category-container--loading"></div>
-        <div class="category-container category-container--loading">
-          <!-- <h3 id="id28" class="category-title">Romance</h3> -->
-        </div>
+        <div class="category-container category-container--loading"></div>
       </article>
 
       <article class="relatedMovies-container">
-        <h2 class="relatedMovies-title">Películas similares</h2>
+        <h2 class="relatedMovies-title">Similar movies</h2>
 
         <div class="relatedMovies-scrollContainer">
           <div class="movie-container movie-container--loading"></div>
           <div class="movie-container movie-container--loading"></div>
-          <div class="movie-container movie-container--loading">
-            <!-- <img
-            src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
-            class="movie-img"
-            alt="Nombre de la película"
-          /> -->
-          </div>
+          <div class="movie-container movie-container--loading"></div>
         </div>
       </article>
     </section>
 
     <footer>
-      Hecho por @jaimediaz96</span>
+      Made by @jaimediaz96</span>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

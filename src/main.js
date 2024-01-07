@@ -1,3 +1,5 @@
+// Data
+
 const api = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
   headers: {
@@ -8,6 +10,24 @@ const api = axios.create({
     language: "es",
   },
 });
+
+function likedMoviesList() {
+  const item = localStorage.getItem("liked_movies");
+
+  let movies = item ? JSON.parse(item) : {};
+
+  return movies;
+}
+
+function likeMovie(movie) {
+  const likedMovies = likedMoviesList();
+
+  const getMovie = likedMovies[movie.id];
+
+  likedMovies[movie.id] = getMovie ? undefined : movie;
+
+  localStorage.setItem("liked_movies", JSON.stringify(likedMovies));
+}
 
 // Utils
 
@@ -30,10 +50,6 @@ function createMovies(
   movies.forEach((movie) => {
     const movieContainer = document.createElement("div");
     movieContainer.classList.add("movie-container");
-    movieContainer.addEventListener(
-      "click",
-      () => (location.hash = "movie=" + movie.id)
-    );
 
     const movieImg = document.createElement("img");
     movieImg.classList.add("movie-img");
@@ -42,8 +58,21 @@ function createMovies(
       lazyLoad ? "data-img" : "src",
       `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
     );
+    movieImg.addEventListener("click", () => {
+      location.hash = "movie=" + movie.id;
+    });
     movieImg.addEventListener("error", () => {
       movieImg.setAttribute("src", `../image/defaultImg.svg`);
+    });
+
+    const movieBtn = document.createElement("button");
+    movieBtn.classList.add("movie-btn");
+    likedMoviesList()[movie.id] && movieBtn.classList.add("movie-btn--liked");
+    movieBtn.addEventListener("click", () => {
+      movieBtn.classList.toggle("movie-btn--liked");
+      likeMovie(movie);
+      getLikedMovies();
+      getTrendingMoviesPreview();
     });
 
     if (lazyLoad) {
@@ -51,6 +80,7 @@ function createMovies(
     }
 
     movieContainer.appendChild(movieImg);
+    movieContainer.appendChild(movieBtn);
     container.appendChild(movieContainer);
   });
 }
@@ -78,7 +108,7 @@ function createGenre(genres, container) {
   });
 }
 
-// Llamados a la API
+// Call to API
 
 async function getTrendingMoviesPreview() {
   const { data } = await api("trending/movie/day");
@@ -218,4 +248,14 @@ async function getSimilarMoviesById(id) {
   createMovies(movies, relatedMoviesContainer, { lazyLoad: true });
 
   relatedMoviesContainer.scrollTo(0, 0);
+}
+
+function getLikedMovies() {
+  const likedMovies = likedMoviesList();
+  const moviesArray = Object.values(likedMovies);
+
+  createMovies(moviesArray, likedMoviesListArticle, {
+    lazyLoad: true,
+    clean: true,
+  });
 }
